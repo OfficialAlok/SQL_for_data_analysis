@@ -1,14 +1,24 @@
 -- Question 1
-SELECT DISTINCT a.name, r.name region
+SELECT a.name, r.name region
 FROM accounts a
 JOIN sales_reps s
 ON a.sales_rep_id = s.id
 JOIN region r
-ON r.id = s.region_id
-ORDER BY name;
+ON r.id = s.region_id;
+
+-- to check 1st
+SELECT DISTINCT name
+FROM accounts
+
 
 -- Question 2
-SELECT DISTINCT a.name, s.name sales_rep
+SELECT s.id, s.name, COUNT(*) num
 FROM accounts a
 JOIN sales_reps s
-ON a.sales_rep_id = s.id
+ON s.id = a.sales_rep_id
+GROUP BY s.id, s.name
+ORDER BY num;
+
+-- to check question 2
+SELECT DISTINCT id, name
+FROM sales_reps
