@@ -13,17 +13,17 @@ ON o.account_id = a.id
 GROUP BY a.name;
 
 -- Question 3
-SELECT s.name, w.channel, COUNT(*)
+SELECT s.name, w.channel, COUNT(*) num_events
 FROM sales_reps s
 JOIN accounts a
 ON a.sales_rep_id = s.id
 JOIN web_events w
 ON w.account_id = a.id
 GROUP BY s.name, w.channel
-ORDER BY count DESC;
+ORDER BY num_events DESC;
 
 -- Question 4
-SELECT r.name, w.channel, COUNT(*)
+SELECT r.name, w.channel, COUNT(*) num_events
 FROM region r
 JOIN sales_reps s
 ON s.region_id = r.id
@@ -32,4 +32,4 @@ ON a.sales_rep_id = s.id
 JOIN web_events w
 ON w.account_id = a.id
 GROUP BY r.name, w.channel
-ORDER BY count DESC;
+ORDER BY num_events DESC;
