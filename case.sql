@@ -31,9 +31,9 @@ GROUP BY 1
 -- Question 3
 SELECT a.name, 
        SUM(total_amt_usd) total_sales,
-       CASE WHEN SUM(total_amt_usd)>= 200000 THEN 'greater than 200k'
-            WHEN SUM(total_amt_usd) BETWEEN 100000 AND 200000 THEN 'between 200k and 100k'
-            ELSE 'under 100 k' END AS level
+       CASE WHEN SUM(total_amt_usd)>= 200000 THEN 'top'
+            WHEN SUM(total_amt_usd) > 100000 THEN 'middle'
+            ELSE 'low' END AS level
 FROM accounts a
 JOIN orders o
 ON o.account_id = a.id
@@ -41,17 +41,17 @@ GROUP BY 1
 ORDER BY 2 DESC;
 
 -- Question 4
-SELECT account_id,
-       name,
-       SUM(total_amt_usd),
-       CASE WHEN SUM(total_amt_usd) >= 3000 THEN 'Large'
-            ELSE 'Small' END AS level_of_order
+SELECT a.name,
+       SUM(total_amt_usd) total_spent,
+       CASE WHEN SUM(total_amt_usd) > 200000 THEN 'top'
+            WHEN SUM(total_amt_usd) > 100000 THEN 'middle'
+            ELSE 'low' END AS level_of_orders
 FROM orders
 JOIN accounts
 ON accounts.id = orders.account_id
-WHERE occurred_at BETWEEN '2016-01-01' AND '2018-01-01'
-GROUP BY account_id, name
-ORDER BY 3 DESC;
+WHERE occurred_at > '2015-12-31'
+GROUP BY 1
+ORDER BY 2 DESC;
 
 -- Question 5
 SELECT s.name,
