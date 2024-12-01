@@ -55,7 +55,7 @@ ORDER BY 2 DESC;
 
 -- Question 5
 SELECT s.name,
-       COUNT(o.*) total_order,
+       COUNT(*) total_order,
        CASE WHEN COUNT(*) > 200 THEN 'top'
             ELSE 'not' END AS performance
 FROM sales_reps s
@@ -68,10 +68,10 @@ ORDER BY 2 DESC;
 
 -- Question 6
 SELECT s.name,
-       COUNT(o.*) total_order,
+       COUNT(*) total_order,
        SUM(o.total_amt_usd) total_sales,
-       CASE WHEN COUNT(o.*) > 200 OR SUM(o.total_amt_usd) > 750000 THEN 'top'
-            WHEN (COUNT(o.*) > 150 AND  COUNT(o.*) <= 200) OR SUM(o.total_amt_usd) > 500000 THEN 'middle'
+       CASE WHEN COUNT(*) > 200 OR SUM(o.total_amt_usd) > 750000 THEN 'top'
+            WHEN COUNT(*) > 150 OR SUM(o.total_amt_usd) > 500000 THEN 'middle'
             ELSE 'low' END AS performance
 FROM sales_reps s
 JOIN accounts a
